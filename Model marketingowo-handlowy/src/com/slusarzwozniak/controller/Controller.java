@@ -36,7 +36,7 @@ public class Controller {
         // TODO: register event 
         
         // TODO: attach view to model
-        
+        model.attach(mainWindow);
     }
 
     public void start() {

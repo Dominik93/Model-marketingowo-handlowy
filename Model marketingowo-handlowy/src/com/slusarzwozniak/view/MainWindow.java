@@ -5,11 +5,13 @@
  */
 package com.slusarzwozniak.view;
 
+import com.slusarzwozniak.model.Model;
+
 /**
  *
  * @author Dominik
  */
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends BasicJFrame {
 
     /**
      * Creates new form MainWindow
@@ -48,4 +50,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Model model) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
