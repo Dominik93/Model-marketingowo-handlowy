@@ -15,6 +15,6 @@ public interface IObservable {
     
     abstract void attach(BasicJFrame view);
     abstract void detach(BasicJFrame view);
-    abstract void notify();
+    abstract void notification();
     
 }

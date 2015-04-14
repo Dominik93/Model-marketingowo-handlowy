@@ -3,6 +3,7 @@ package com.slusarzwozniak.main;
 
 import com.slusarzwozniak.controller.Controller;
 import com.slusarzwozniak.model.Model;
+import com.slusarzwozniak.view.MainWindow;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,8 +16,8 @@ import com.slusarzwozniak.model.Model;
  * @author Dominik
  */
 public class ModelMarketingowoHandlowy {
-    public static void main(String args[]) {
-        Controller controller = new Controller(new Model());
+    public static void main(String args[]) throws ClassNotFoundException {
+        Controller controller = new Controller(new Model(), new MainWindow());
         controller.start();
     }
 }

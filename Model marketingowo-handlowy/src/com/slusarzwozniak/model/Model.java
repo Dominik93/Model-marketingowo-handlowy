@@ -6,6 +6,7 @@
 package com.slusarzwozniak.model;
 
 import com.slusarzwozniak.interfaces.IObservable;
+import com.slusarzwozniak.model.database.Database;
 import com.slusarzwozniak.view.BasicJFrame;
 import java.util.ArrayList;
 
@@ -15,7 +16,14 @@ import java.util.ArrayList;
  */
 public class Model implements IObservable{
 
+    private final Database db;
+    
     private final ArrayList<BasicJFrame> views = new ArrayList<>();
+    
+    public Model() throws ClassNotFoundException{
+        //TODO: zmienić na prawdziwe dane
+        this.db = new Database("URL", "USER", "PASSWORD");
+    }
     
     @Override
     public void attach(BasicJFrame view) {

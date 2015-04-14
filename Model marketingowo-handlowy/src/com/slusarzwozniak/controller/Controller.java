@@ -6,6 +6,7 @@
 package com.slusarzwozniak.controller;
 
 import com.slusarzwozniak.model.Model;
+import com.slusarzwozniak.view.BasicJFrame;
 import com.slusarzwozniak.view.MainWindow;
 
 /**
@@ -15,32 +16,15 @@ import com.slusarzwozniak.view.MainWindow;
 public class Controller {
     
     private final Model model;
-    private MainWindow mainWindow;
+    private BasicJFrame mainWindow;
     
-    public Controller(Model model) {
+    public Controller(Model model, BasicJFrame basicJFrame) {
         this.model = model;
-    }
-    
-    public void init(){
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        this.mainWindow = new MainWindow();
-        // TODO: register event 
-        
-        // TODO: attach view to model
+        this.mainWindow = basicJFrame;
         model.attach(mainWindow);
     }
 
     public void start() {
-        this.init();
         mainWindow.setVisible(true);
     }
     
