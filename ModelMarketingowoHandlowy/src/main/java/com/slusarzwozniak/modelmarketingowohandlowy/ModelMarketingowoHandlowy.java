@@ -7,7 +7,7 @@ package com.slusarzwozniak.modelmarketingowohandlowy;
 
 import com.slusarzwozniak.controller.Controller;
 import com.slusarzwozniak.model.Model;
-import com.slusarzwozniak.view.MainWindow;
+import com.slusarzwozniak.view.Login;
 
 /**
  *
@@ -15,7 +15,7 @@ import com.slusarzwozniak.view.MainWindow;
  */
 public class ModelMarketingowoHandlowy {
     public static void main(String args[]) throws ClassNotFoundException {
-        Controller controller = new Controller(new Model(), new MainWindow());
+        Controller controller = new Controller(new Model(), new Login());
         controller.start();
     }
 }

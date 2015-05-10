@@ -41,5 +41,9 @@ public class Model implements IObservable{
             view.update(this);
         }
     }
+
+    public boolean checkUser() {
+        return true;
+    }
     
 }

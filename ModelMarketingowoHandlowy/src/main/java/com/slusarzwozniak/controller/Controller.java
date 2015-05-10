@@ -7,7 +7,15 @@ package com.slusarzwozniak.controller;
 
 import com.slusarzwozniak.model.Model;
 import com.slusarzwozniak.view.BasicJFrame;
+import com.slusarzwozniak.view.Login;
 import com.slusarzwozniak.view.MainWindow;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -16,16 +24,35 @@ import com.slusarzwozniak.view.MainWindow;
 public class Controller {
     
     private final Model model;
-    private BasicJFrame mainWindow;
+    private MainWindow mainWindow;
+    private Login login;
     
-    public Controller(Model model, BasicJFrame basicJFrame) {
+    public Controller(Model model, Login basicJFrame) {
         this.model = model;
-        this.mainWindow = basicJFrame;
-        model.attach(mainWindow);
+        this.login = basicJFrame;
+        this.model.attach(login);
     }
 
     public void start() {
-        mainWindow.setVisible(true);
+        this.login.setVisible(true);
+        this.registerLoginEvents();
     }
     
+    private void registerLoginEvents(){
+        this.login.jButtonLoginActionPerformed(new jButtonLogin());
+    }
+    
+    
+    private class jButtonLogin implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(model.checkUser()){
+                login.dispose();
+                mainWindow = new MainWindow();
+                mainWindow.setVisible(true);
+            }
+        }
+    
+    }
 }
