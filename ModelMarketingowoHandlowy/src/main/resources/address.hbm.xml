@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.slusarzwozniak.model.Address" table="address">
+      <meta attribute="class-description">
+        This class contains the address detail. 
+      </meta>
+      <id name="id" type="int" column="ID">
+         <generator class="native"/>
+      </id>
+      <property name="street" column="Street" type="string"/>
+      <property name="number" column="Number" type="int"/>
+      <property name="city" column="City" type="string"/>
+      <property name="zipCode" column="ZipCode" type="string"/>
+  </class>
+</hibernate-mapping>

@@ -5,7 +5,9 @@
  */
 package com.slusarzwozniak.model.hibernate;
 
+import com.slusarzwozniak.model.PersonalData;
 import com.slusarzwozniak.model.Worker;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -26,6 +28,7 @@ public class MenageWorker {
             factory = new Configuration().configure().buildSessionFactory();
         }catch (Throwable ex) { 
             System.err.println("Failed to create sessionFactory object." + ex);
+            ex.printStackTrace();
         }
     }
     
@@ -48,23 +51,25 @@ public class MenageWorker {
         }
         return worker;
     }
-    
-    public void getWorkers(){
-      Session session = factory.openSession();
-      Transaction tx = null;
-      try{
-         tx = session.beginTransaction();
-         List workers = session.createQuery("FROM Worker").list(); 
-         for (Iterator iterator = workers.iterator(); iterator.hasNext();){
-            Worker employee = (Worker) iterator.next(); 
-            System.out.print("ID : " + employee.getId());
-         }
-         tx.commit();
-      }catch (HibernateException e) {
-         if (tx!=null) tx.rollback();
-         e.printStackTrace(); 
-      }finally {
-         session.close(); 
-      }
+        
+    public ArrayList getWorkers(){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        ArrayList<Worker> workers = new ArrayList<>();
+        try{
+            tx = session.beginTransaction();
+            List workersList = session.createQuery("FROM Worker").list();
+            for (Iterator iteratorWorkers = workersList.iterator(); iteratorWorkers.hasNext(); ){
+                Worker worker = (Worker) iteratorWorkers.next(); 
+                workers.add(worker);
+            }
+            tx.commit();
+        }catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace(); 
+        }finally {
+            session.close(); 
+        }
+        return workers;
    }
 }

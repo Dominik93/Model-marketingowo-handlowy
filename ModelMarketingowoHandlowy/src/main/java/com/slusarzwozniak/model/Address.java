@@ -9,20 +9,21 @@ package com.slusarzwozniak.model;
  *
  * @author Dominik
  */
+
 public class Address {
     
     private Integer id;
     private String street;
-    private Integer buldingNumer;
+    private Integer number;
     private String city;
     private String zipCode;
 
     public Address() {
     }
 
-    public Address(String street, Integer buldingNumer, String city, String zipCode) {
+    public Address(String street, Integer number, String city, String zipCode) {
         this.street = street;
-        this.buldingNumer = buldingNumer;
+        this.number = number;
         this.city = city;
         this.zipCode = zipCode;
     }
@@ -43,12 +44,12 @@ public class Address {
         this.street = street;
     }
 
-    public Integer getBuldingNumer() {
-        return buldingNumer;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setBuldingNumer(Integer buldingNumer) {
-        this.buldingNumer = buldingNumer;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getCity() {

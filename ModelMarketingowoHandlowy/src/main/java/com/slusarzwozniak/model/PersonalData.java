@@ -29,7 +29,6 @@ public class PersonalData {
         this.emailAddress = emailAddress;
     }
 
-    
     public Integer getId() {
         return id;
     }
@@ -77,6 +76,5 @@ public class PersonalData {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-    
     
 }

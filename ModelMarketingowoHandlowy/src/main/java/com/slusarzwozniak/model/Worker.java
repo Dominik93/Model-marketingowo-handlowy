@@ -5,6 +5,8 @@
  */
 package com.slusarzwozniak.model;
 
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author Dominik

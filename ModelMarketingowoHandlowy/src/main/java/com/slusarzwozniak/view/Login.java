@@ -7,6 +7,7 @@ package com.slusarzwozniak.view;
 
 import com.slusarzwozniak.model.Model;
 import java.awt.event.ActionListener;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -17,7 +18,8 @@ public class Login extends BasicJFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login() throws InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+        this.setStyle();
         initComponents();
     }
 
@@ -37,6 +39,9 @@ public class Login extends BasicJFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        setMaximumSize(new java.awt.Dimension(200, 150));
+        setMinimumSize(new java.awt.Dimension(200, 150));
+        setPreferredSize(new java.awt.Dimension(200, 150));
 
         jLabel1.setText("User name");
 
@@ -52,7 +57,7 @@ public class Login extends BasicJFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBoxUsers, 0, 94, Short.MAX_VALUE)
+                .addComponent(jComboBoxUsers, 0, 96, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)

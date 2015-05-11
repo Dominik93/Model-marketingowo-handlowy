@@ -39,16 +39,30 @@ public class Model implements IObservable{
     }
 
     public String[] getUsers(){
-        ArrayList<String> usersList = new ArrayList();
+        ArrayList<Worker> workersList;
         MenageWorker menageWorker = new MenageWorker();
-        //menageWorker.getWorkers();
-        String[] users = new String[usersList.size()];
-        users = usersList.toArray(users);
+        workersList = menageWorker.getWorkers();
+        String[] users = new String[workersList.size()];
+        for(int i = 0; i < workersList.size(); i++){
+            //users[i] = workersList.get(i).getPersonalData().getName();
+        }
         return users;
+    }
+    
+    public void addUser(){
+        Address address = new Address("Ulica", 15, "miasto", "zipcode");
+        PersonalData personalData = new PersonalData(address, "Imie", "Nazwisko", "tel", "email");
+        Worker worker = new Worker(personalData);
+        MenageWorker menageWorker = new MenageWorker();
+        menageWorker.addWorker(worker);
     }
     
     public boolean checkUser() {
         return true;
+    }
+
+    public void addWorker(Worker worker) {
+        new MenageWorker().addWorker(worker);
     }
     
 }
