@@ -6,7 +6,7 @@
 package com.slusarzwozniak.model;
 
 import com.slusarzwozniak.interfaces.IObservable;
-import com.slusarzwozniak.model.database.Database;
+import com.slusarzwozniak.model.hibernate.MenageWorker;
 import com.slusarzwozniak.view.BasicJFrame;
 import java.util.ArrayList;
 
@@ -15,14 +15,10 @@ import java.util.ArrayList;
  * @author Dominik
  */
 public class Model implements IObservable{
-
-    private final Database db;
     
     private final ArrayList<BasicJFrame> views = new ArrayList<>();
     
     public Model() throws ClassNotFoundException{
-        //TODO: zmienić na prawdziwe dane
-        this.db = new Database("URL", "USER", "PASSWORD");
     }
     
     @Override
@@ -42,6 +38,15 @@ public class Model implements IObservable{
         }
     }
 
+    public String[] getUsers(){
+        ArrayList<String> usersList = new ArrayList();
+        MenageWorker menageWorker = new MenageWorker();
+        //menageWorker.getWorkers();
+        String[] users = new String[usersList.size()];
+        users = usersList.toArray(users);
+        return users;
+    }
+    
     public boolean checkUser() {
         return true;
     }

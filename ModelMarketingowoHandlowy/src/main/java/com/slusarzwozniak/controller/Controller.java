@@ -6,16 +6,10 @@
 package com.slusarzwozniak.controller;
 
 import com.slusarzwozniak.model.Model;
-import com.slusarzwozniak.view.BasicJFrame;
 import com.slusarzwozniak.view.Login;
 import com.slusarzwozniak.view.MainWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -31,6 +25,7 @@ public class Controller {
         this.model = model;
         this.login = basicJFrame;
         this.model.attach(login);
+        this.model.notification();
     }
 
     public void start() {

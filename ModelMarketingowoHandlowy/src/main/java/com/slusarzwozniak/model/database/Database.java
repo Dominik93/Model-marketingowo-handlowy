@@ -31,7 +31,12 @@ public class Database {
 
     public void connect() {
         try {
-            this.connection = java.sql.DriverManager.getConnection(this.url, this.user, this.password);
+            System.out.println("jdbc:mysql://this.url:3306/virt101443_mh "
+              + "user="+this.user+"&password="+this.password);
+            
+            
+            this.connection = java.sql.DriverManager.getConnection("jdbc:mysql://this.url:3306/virt101443_mh?"
+              + "user="+this.user+"&password="+this.password);
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
