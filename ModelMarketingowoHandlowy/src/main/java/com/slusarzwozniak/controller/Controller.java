@@ -55,12 +55,18 @@ public class Controller {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(model.checkUser()){
-                login.dispose();
-                mainWindow = new MainWindow();
-                registerMainEvents();
-                mainWindow.setVisible(true);
+            model.detach(login);
+            login.dispose();
+            if(model.checkWorker(login.getjComboBoxUsers().getSelectedItem().toString())){
+                model.setWorker(model.getWerehouseWorker(login.getjComboBoxUsers().getSelectedItem().toString()));
+            }else{
+                model.setWorker(model.getShopWorker(login.getjComboBoxUsers().getSelectedItem().toString()));
             }
+            mainWindow = new MainWindow();
+            model.attach(mainWindow);
+            model.notification();
+            registerMainEvents();
+            mainWindow.setVisible(true);
         }
     
     }
@@ -70,6 +76,8 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             addWorkerJFrame = new AddWorkerJFrame();
+            model.attach(addWorkerJFrame);
+            model.notification();
             registerAddWorkerEvents();
             addWorkerJFrame.setVisible(true);
         }

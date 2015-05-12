@@ -5,7 +5,11 @@
  */
 package com.slusarzwozniak.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
 
 /**
  *
@@ -13,7 +17,10 @@ import javax.persistence.OneToOne;
  */
 public class Worker {
     
+    @Id  @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+    
+    @OneToOne
     private PersonalData personalData;
 
     public Worker() {

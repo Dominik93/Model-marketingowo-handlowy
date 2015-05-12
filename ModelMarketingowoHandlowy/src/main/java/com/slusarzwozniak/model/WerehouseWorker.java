@@ -11,4 +11,7 @@ package com.slusarzwozniak.model;
  */
 public class WerehouseWorker extends Worker{
     
+    public WerehouseWorker(Worker worker){
+        
+    }
 }

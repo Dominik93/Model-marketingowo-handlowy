@@ -7,6 +7,7 @@ package com.slusarzwozniak.view;
 
 import com.slusarzwozniak.model.Model;
 import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -36,12 +37,13 @@ public class Login extends BasicJFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonLogin = new javax.swing.JButton();
         jComboBoxUsers = new javax.swing.JComboBox();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
-        setMaximumSize(new java.awt.Dimension(200, 150));
-        setMinimumSize(new java.awt.Dimension(200, 150));
-        setPreferredSize(new java.awt.Dimension(200, 150));
+        setMaximumSize(new java.awt.Dimension(300, 125));
+        setMinimumSize(new java.awt.Dimension(300, 125));
+        setPreferredSize(new java.awt.Dimension(300, 125));
 
         jLabel1.setText("User name");
 
@@ -57,12 +59,14 @@ public class Login extends BasicJFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBoxUsers, 0, 96, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLogin))
+                    .addComponent(jComboBoxUsers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jButtonLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,8 +75,13 @@ public class Login extends BasicJFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBoxUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonLogin)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLogin))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -91,11 +100,20 @@ public class Login extends BasicJFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JComboBox jComboBoxUsers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public JComboBox getjComboBoxUsers() {
+        return jComboBoxUsers;
+    }
+
+    public void setjComboBoxUsers(JComboBox jComboBoxUsers) {
+        this.jComboBoxUsers = jComboBoxUsers;
+    }
 
     public void jButtonLoginActionPerformed(ActionListener actionListener){
         this.jButtonLogin.addActionListener(actionListener);
@@ -103,7 +121,7 @@ public class Login extends BasicJFrame {
     
     @Override
     public void update(Model model) {
-        jComboBoxUsers.setModel(new javax.swing.DefaultComboBoxModel(model.getUsers()));
+        jComboBoxUsers.setModel(new javax.swing.DefaultComboBoxModel(model.workersToComboBox()));
     }
 
 }

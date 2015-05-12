@@ -6,9 +6,11 @@
 package com.slusarzwozniak.model;
 
 import com.slusarzwozniak.interfaces.IObservable;
-import com.slusarzwozniak.model.hibernate.MenageWorker;
+import com.slusarzwozniak.model.hibernate.MenagerWorker;
 import com.slusarzwozniak.view.BasicJFrame;
 import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,8 +19,19 @@ import java.util.ArrayList;
 public class Model implements IObservable{
     
     private final ArrayList<BasicJFrame> views = new ArrayList<>();
+    private MenagerWorker menagerWorker;
+    
+    private Worker worker;
     
     public Model() throws ClassNotFoundException{
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
     
     @Override
@@ -38,31 +51,55 @@ public class Model implements IObservable{
         }
     }
 
-    public String[] getUsers(){
-        ArrayList<Worker> workersList;
-        MenageWorker menageWorker = new MenageWorker();
-        workersList = menageWorker.getWorkers();
-        String[] users = new String[workersList.size()];
-        for(int i = 0; i < workersList.size(); i++){
-            //users[i] = workersList.get(i).getPersonalData().getName();
+    public DefaultTableModel workersToTable(){
+        DefaultTableModel tableModel = new DefaultTableModel();
+        Vector vector;
+        tableModel.addColumn("ID");
+        tableModel.addColumn("Name");
+        tableModel.addColumn("Surname");
+        menagerWorker = new MenagerWorker();
+        ArrayList<Worker> workersList = menagerWorker.getWorkers();
+        for(Worker w : workersList){
+            vector = new Vector();
+            vector.add(w.getId());
+            vector.add(w.getPersonalData().getName());
+            vector.add(w.getPersonalData().getSurname());
+            tableModel.addRow(vector);
         }
-        return users;
+        menagerWorker.closeSession();
+        return tableModel;
     }
     
-    public void addUser(){
-        Address address = new Address("Ulica", 15, "miasto", "zipcode");
-        PersonalData personalData = new PersonalData(address, "Imie", "Nazwisko", "tel", "email");
-        Worker worker = new Worker(personalData);
-        MenageWorker menageWorker = new MenageWorker();
-        menageWorker.addWorker(worker);
+    public String[] workersToComboBox(){
+       menagerWorker = new MenagerWorker();
+       ArrayList<Worker> workersList = menagerWorker.getWorkers();
+       String[] workers = new String[workersList.size()];
+       for(int i = 0; i < workers.length; i++)
+           workers[i] = workersList.get(i).getId() + " "
+                   + workersList.get(i).getPersonalData().getName() + " "
+                   + workersList.get(i).getPersonalData().getSurname();
+       menagerWorker.closeSession();
+       return workers;
     }
     
-    public boolean checkUser() {
-        return true;
-    }
 
     public void addWorker(Worker worker) {
-        new MenageWorker().addWorker(worker);
+        new MenagerWorker().addWorker(worker);
+    }
+
+    public boolean checkWorker(String toString) {
+        if(true){
+            return true;
+        }
+        return false;
+    }
+
+    public Worker getShopWorker(String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Worker getWerehouseWorker(String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

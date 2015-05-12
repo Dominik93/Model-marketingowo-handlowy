@@ -297,6 +297,6 @@ public class AddWorkerJFrame extends BasicJFrame {
     
     @Override
     public void update(Model model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 }
