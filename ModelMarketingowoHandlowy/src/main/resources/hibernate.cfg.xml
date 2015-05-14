@@ -9,5 +9,8 @@
     <mapping resource="address.hbm.xml"/>
     <mapping resource="personalData.hbm.xml"/>
     <mapping resource="worker.hbm.xml"/>
+    <mapping resource="position.hbm.xml"/>
+    <mapping resource="shop.hbm.xml"/>
+    <mapping resource="werehouse.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

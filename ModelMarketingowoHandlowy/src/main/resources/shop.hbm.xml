@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.slusarzwozniak.model.workplace.Shop" table="shop">
+        <meta attribute="class-description">
+        This class contains the shop detail. 
+        </meta>
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id>
+        <property column="rent" name="Rent" type="float"/>
+        <many-to-one class="com.slusarzwozniak.model.Address" column="AddressID" name="Address" not-null="true"/>
+        
+  </class>
+</hibernate-mapping>

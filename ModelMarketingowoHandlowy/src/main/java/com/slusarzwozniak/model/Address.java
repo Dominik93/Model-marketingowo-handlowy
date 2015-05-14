@@ -68,5 +68,9 @@ public class Address {
         this.zipCode = zipCode;
     }
     
+    @Override
+    public String toString(){
+        return this.city + " " + this.zipCode + " "+ this.street + " " +this.number;
+    }
     
 }

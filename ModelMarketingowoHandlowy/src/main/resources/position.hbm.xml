@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="com.slusarzwozniak.model.worker.Worker" table="worker">
+  <class name="com.slusarzwozniak.model.worker.Position" table="position">
     <meta attribute="class-description">
-        This class contains the worker detail. 
+        This class contains the position detail. 
       </meta>
     <id column="ID" name="id" type="int">
       <generator class="native"/>
     </id>
-    <many-to-one class="com.slusarzwozniak.model.worker.PersonalData" column="PersonalDataID" name="PersonalData" not-null="true"/>
+    <property column="Name" name="name" type="string"/>
+    <property column="Bid" name="bid" type="float"/>
   </class>
 </hibernate-mapping>

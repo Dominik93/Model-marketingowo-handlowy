@@ -7,14 +7,21 @@ package com.slusarzwozniak.controller;
 
 import com.slusarzwozniak.model.Address;
 import com.slusarzwozniak.model.Model;
-import com.slusarzwozniak.model.PersonalData;
-import com.slusarzwozniak.model.Worker;
+import com.slusarzwozniak.model.worker.PersonalData;
+import com.slusarzwozniak.model.worker.Worker;
+import com.slusarzwozniak.model.workplace.Shop;
+import com.slusarzwozniak.model.workplace.Werehouse;
+import com.slusarzwozniak.model.workplace.Workplace;
 import com.slusarzwozniak.view.AddWorkerJFrame;
+import com.slusarzwozniak.view.AddWorkplaceJFrame;
 import com.slusarzwozniak.view.Login;
 import com.slusarzwozniak.view.MainWindow;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -26,6 +33,7 @@ public class Controller {
     private MainWindow mainWindow;
     private Login login;
     private AddWorkerJFrame addWorkerJFrame;
+    private AddWorkplaceJFrame addWorkplaceJFrame;
     
     public Controller(Model model, Login loginJFrame) {
         this.model = model;
@@ -45,10 +53,18 @@ public class Controller {
     
     private void registerMainEvents(){
         this.mainWindow.jButtonAddWorkerActionPerformed(new jButtonAddWorker());
+        this.mainWindow.jButtonAddWerehouseActionPerformed(new jButtonAddWerehouse());
+        this.mainWindow.jButtonAddShopActionPerformed(new jButtonAddShop());
     }
     
     private void registerAddWorkerEvents(){
-        addWorkerJFrame.jButtonSaveActionPerformed(new jButtonSave());
+        addWorkerJFrame.jButtonSaveActionPerformed(new jButtonSaveWorker());
+        addWorkerJFrame.jButtonCancelActionPerformed(new jButtonCancel());
+    }
+    
+    private void registerAddWorkplaceEvents(){
+        addWorkplaceJFrame.jButtonSaveActionPerformed(new jButtonSaveWorkplace());
+        addWorkplaceJFrame.jButtonCancelActionPerformed(new jButtonCancel());
     }
     
     private class jButtonLogin implements ActionListener{
@@ -57,11 +73,13 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             model.detach(login);
             login.dispose();
+            /*
             if(model.checkWorker(login.getjComboBoxUsers().getSelectedItem().toString())){
                 model.setWorker(model.getWerehouseWorker(login.getjComboBoxUsers().getSelectedItem().toString()));
             }else{
                 model.setWorker(model.getShopWorker(login.getjComboBoxUsers().getSelectedItem().toString()));
             }
+            */
             mainWindow = new MainWindow();
             model.attach(mainWindow);
             model.notification();
@@ -84,7 +102,44 @@ public class Controller {
     
     }
     
-    private class jButtonSave implements ActionListener{
+    private class jButtonAddWerehouse implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            addWorkplaceJFrame = new AddWorkplaceJFrame(Werehouse.class);
+            model.attach(addWorkplaceJFrame);
+            model.notification();
+            registerAddWorkplaceEvents();
+            addWorkplaceJFrame.setVisible(true);
+        }
+    
+    }
+    
+    private class jButtonAddShop implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            addWorkplaceJFrame = new AddWorkplaceJFrame(Shop.class);
+            model.attach(addWorkplaceJFrame);
+            model.notification();
+            registerAddWorkplaceEvents();
+            addWorkplaceJFrame.setVisible(true);
+        }
+    
+    }
+    
+    private class jButtonCancel implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Component component = (Component) e.getSource();
+            JFrame frame = (JFrame) SwingUtilities.getRoot(component);
+            frame.dispose();
+        }
+    
+    }
+    
+    private class jButtonSaveWorker implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -164,8 +219,63 @@ public class Controller {
                         addWorkerJFrame.getjTextFieldPhone().getText(),
                         addWorkerJFrame.getjTextFieldEmail().getText());
                 model.addWorker(new Worker(personalData));
+                model.notification();
+                addWorkerJFrame.dispose();
             }
         }
+    }
     
+    private class jButtonSaveWorkplace implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean save = true;
+            if(addWorkplaceJFrame.getjTextFieldCity().getText().equals("")){
+                addWorkplaceJFrame.getjTextFieldCity().setBackground(Color.red);
+                addWorkplaceJFrame.getjTextFieldCity().setOpaque(false);
+                save = false;
+            }
+            else{
+                addWorkplaceJFrame.getjTextFieldCity().setBackground(Color.green);
+            }
+            if(addWorkplaceJFrame.getjTextFieldBuildingNumber().getText().equals("")){
+                addWorkplaceJFrame.getjTextFieldBuildingNumber().setBackground(Color.red);
+                addWorkplaceJFrame.getjTextFieldBuildingNumber().setOpaque(false);
+                save = false;
+            }
+            else{
+                addWorkplaceJFrame.getjTextFieldBuildingNumber().setBackground(Color.green);
+            }
+            if(addWorkplaceJFrame.getjTextFieldStreet().getText().equals("")){
+                addWorkplaceJFrame.getjTextFieldStreet().setBackground(Color.red);
+                addWorkplaceJFrame.getjTextFieldStreet().setOpaque(false);
+                save = false;
+            }
+            else{
+                addWorkplaceJFrame.getjTextFieldStreet().setBackground(Color.green);
+            }
+            if(addWorkplaceJFrame.getjTextFieldZipCode().getText().equals("")){
+                addWorkplaceJFrame.getjTextFieldZipCode().setBackground(Color.red);
+                addWorkplaceJFrame.getjTextFieldZipCode().setOpaque(false);
+                save = false;
+            }
+            else{
+                addWorkplaceJFrame.getjTextFieldZipCode().setBackground(Color.green);
+            }
+            if(save){
+                Address address = new Address(addWorkplaceJFrame.getjTextFieldStreet().getText(),
+                        Integer.valueOf(addWorkplaceJFrame.getjTextFieldBuildingNumber().getText()),
+                        addWorkplaceJFrame.getjTextFieldCity().getText(),
+                        addWorkplaceJFrame.getjTextFieldZipCode().getText());
+                Workplace workplace = null; 
+                if(addWorkplaceJFrame.getC().equals(Shop.class))        
+                        workplace = new Shop(address, Float.valueOf(addWorkplaceJFrame.getjSpinnerRent().getValue().toString()));
+                else if(addWorkplaceJFrame.getC().equals(Werehouse.class))   
+                        workplace = new Werehouse(address, Float.valueOf(addWorkplaceJFrame.getjSpinnerRent().getValue().toString()));
+                model.addWorkplace(workplace, addWorkplaceJFrame.getC());
+                model.notification();
+                addWorkplaceJFrame.dispose();
+            }
+        }
     }
 }

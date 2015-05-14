@@ -121,7 +121,7 @@ public class Login extends BasicJFrame {
     
     @Override
     public void update(Model model) {
-        jComboBoxUsers.setModel(new javax.swing.DefaultComboBoxModel(model.workersToComboBox()));
+        jComboBoxUsers.setModel(model.workersToComboBox());
     }
 
 }

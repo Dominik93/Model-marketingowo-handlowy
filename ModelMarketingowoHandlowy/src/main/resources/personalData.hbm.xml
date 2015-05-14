@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="com.slusarzwozniak.model.PersonalData" table="personaldata">
-      <meta attribute="class-description">
+  <class name="com.slusarzwozniak.model.worker.PersonalData" table="personaldata">
+    <meta attribute="class-description">
         This class contains the personal data detail. 
-      </meta>
-      <id name="id" type="int" column="ID">
-         <generator class="native"/>
-      </id>
-      <property name="name" column="Name" type="string"/>
-      <property name="surname" column="Surname" type="string"/>
-      <property name="phoneNumber" column="PhoneNumber" type="string"/>
-      <property name="emailAddress" column="EmailAddress" type="string"/>
-      <many-to-one name="Address" column="AddressID"
-       class="com.slusarzwozniak.model.Address" not-null="true"/>
+    </meta>
+    <id column="ID" name="id" type="int">
+      <generator class="native"/>
+    </id>
+    <property column="Name" name="name" type="string"/>
+    <property column="Surname" name="surname" type="string"/>
+    <property column="PhoneNumber" name="phoneNumber" type="string"/>
+    <property column="EmailAddress" name="emailAddress" type="string"/>
+    <many-to-one class="com.slusarzwozniak.model.Address" column="AddressID" name="Address" not-null="true"/>
   </class>
 </hibernate-mapping>

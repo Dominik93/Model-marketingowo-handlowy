@@ -54,9 +54,13 @@ public class AddWorkerJFrame extends BasicJFrame {
         jComboBoxWorkPlace = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jButtonSave = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTablePositions = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableWorkPlace = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add worker");
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -87,7 +91,33 @@ public class AddWorkerJFrame extends BasicJFrame {
 
         jButtonSave.setText("Save");
 
-        jButton2.setText("Cancel");
+        jButtonCancel.setText("Cancel");
+
+        jTablePositions.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTablePositions);
+
+        jTableWorkPlace.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableWorkPlace);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,7 +127,19 @@ public class AddWorkerJFrame extends BasicJFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+                        .addComponent(jButtonCancel))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBoxWorkPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -123,16 +165,7 @@ public class AddWorkerJFrame extends BasicJFrame {
                             .addComponent(jTextFieldCity, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addComponent(jTextFieldZipCode)
                             .addComponent(jTextFieldStreet)
-                            .addComponent(jTextFieldBuildingNumber)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonSave)
-                            .addComponent(jComboBoxWorkPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                            .addComponent(jTextFieldBuildingNumber))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,11 +202,15 @@ public class AddWorkerJFrame extends BasicJFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxWorkPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxWorkPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonCancel))
                 .addContainerGap())
         );
 
@@ -192,7 +229,7 @@ public class AddWorkerJFrame extends BasicJFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox jComboBoxWorkPlace;
     private javax.swing.JLabel jLabel1;
@@ -207,6 +244,10 @@ public class AddWorkerJFrame extends BasicJFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTablePositions;
+    private javax.swing.JTable jTableWorkPlace;
     private javax.swing.JTextField jTextFieldBuildingNumber;
     private javax.swing.JTextField jTextFieldCity;
     private javax.swing.JTextField jTextFieldEmail;
@@ -288,15 +329,17 @@ public class AddWorkerJFrame extends BasicJFrame {
     public void setjTextFieldZipCode(JTextField jTextFieldZipCode) {
         this.jTextFieldZipCode = jTextFieldZipCode;
     }
-
-    
     
     public void jButtonSaveActionPerformed(ActionListener actionListener){
         this.jButtonSave.addActionListener(actionListener);
     }
     
+    public void jButtonCancelActionPerformed(ActionListener actionListener){
+        this.jButtonCancel.addActionListener(actionListener);
+    }
+    
     @Override
     public void update(Model model) {
-       
+       this.jTablePositions.setModel(model.positionsToTable());
     }
 }

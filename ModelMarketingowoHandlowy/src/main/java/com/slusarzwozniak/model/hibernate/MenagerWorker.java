@@ -5,9 +5,10 @@
  */
 package com.slusarzwozniak.model.hibernate;
 
+import com.slusarzwozniak.model.worker.Position;
+import com.slusarzwozniak.model.worker.PersonalData;
 import com.slusarzwozniak.model.Address;
-import com.slusarzwozniak.model.PersonalData;
-import com.slusarzwozniak.model.Worker;
+import com.slusarzwozniak.model.worker.Worker;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -87,5 +88,24 @@ public class MenagerWorker {
 
     public void closeSession() {
         session.close(); 
+    }
+
+    public ArrayList<Position> getPositions() {
+        session = factory.openSession();
+        Transaction tx = null;
+        ArrayList<Position> positions = new ArrayList<>();
+        try{
+            tx = session.beginTransaction();
+            List positionsList = session.createQuery("FROM Position").list();
+            for (Iterator iteratorPositions = positionsList.iterator(); iteratorPositions.hasNext(); ){
+                Position position = (Position) iteratorPositions.next();
+                positions.add(position);
+            }
+            tx.commit();
+        }catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace(); 
+        }
+        return positions;
     }
 }
