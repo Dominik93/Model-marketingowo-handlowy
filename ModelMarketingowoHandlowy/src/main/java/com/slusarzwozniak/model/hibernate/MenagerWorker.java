@@ -56,6 +56,38 @@ public class MenagerWorker {
     }
     
     /* Method to GET all workers from the database */
+    public Worker getWorker(int id){
+        session = factory.openSession();
+        Transaction tx = null;
+        Worker w = null;
+        try{
+            tx = session.beginTransaction();
+            List workersList = session.createQuery("FROM Worker WHERE id = "+ id).list();
+            for (Iterator iteratorWorkers = workersList.iterator(); iteratorWorkers.hasNext(); ){
+                Worker worker = (Worker) iteratorWorkers.next();
+                Address address = new Address(worker.getPersonalData().getAddress().getStreet(),
+                                                worker.getPersonalData().getAddress().getNumber(),
+                                                worker.getPersonalData().getAddress().getCity(),
+                                                worker.getPersonalData().getAddress().getZipCode());
+                address.setId(worker.getPersonalData().getAddress().getId());
+                PersonalData personalData = new PersonalData(address,
+                                                worker.getPersonalData().getName(),
+                                                worker.getPersonalData().getSurname(),
+                                                worker.getPersonalData().getPhoneNumber(),
+                                                worker.getPersonalData().getEmailAddress());
+                personalData.setId(worker.getPersonalData().getId());
+                w = new Worker(personalData);
+                w.setId(worker.getId());
+            }
+            tx.commit();
+        }catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace(); 
+        }
+        return w;
+   }
+    
+    /* Method to GET all workers from the database */
     public ArrayList getWorkers(){
         session = factory.openSession();
         Transaction tx = null;
@@ -69,14 +101,16 @@ public class MenagerWorker {
                                                 worker.getPersonalData().getAddress().getNumber(),
                                                 worker.getPersonalData().getAddress().getCity(),
                                                 worker.getPersonalData().getAddress().getZipCode());
+                address.setId(worker.getPersonalData().getAddress().getId());
                 PersonalData personalData = new PersonalData(address,
                                                 worker.getPersonalData().getName(),
                                                 worker.getPersonalData().getSurname(),
                                                 worker.getPersonalData().getPhoneNumber(),
                                                 worker.getPersonalData().getEmailAddress());
+                personalData.setId(worker.getPersonalData().getId());
                 Worker w = new Worker(personalData);
                 w.setId(worker.getId());
-                workers.add(worker);
+                workers.add(w);
             }
             tx.commit();
         }catch (HibernateException e) {
@@ -84,7 +118,7 @@ public class MenagerWorker {
             e.printStackTrace(); 
         }
         return workers;
-   }
+    }
 
     public void closeSession() {
         session.close(); 
@@ -107,5 +141,22 @@ public class MenagerWorker {
             e.printStackTrace(); 
         }
         return positions;
+    }
+
+    public boolean deleteWorker(Worker worker) {
+        session = factory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            session.delete(worker.getPersonalData().getAddress());
+            session.delete(worker.getPersonalData());
+            session.delete(worker);
+            tx.commit();
+            return true;
+        }catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace(); 
+            return false;
+        }
     }
 }

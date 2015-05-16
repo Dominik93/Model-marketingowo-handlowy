@@ -9,6 +9,9 @@ import com.slusarzwozniak.model.Model;
 import com.slusarzwozniak.model.workplace.Shop;
 import com.slusarzwozniak.model.workplace.Werehouse;
 import java.awt.event.ActionListener;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -42,6 +45,9 @@ public class MainWindow extends BasicJFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuWorker = new javax.swing.JPopupMenu();
+        jMenuItemMenageWorkplace = new javax.swing.JMenuItem();
+        jMenuItemDelete = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jButtonAddWorker = new javax.swing.JButton();
@@ -55,6 +61,12 @@ public class MainWindow extends BasicJFrame {
         jTableShop = new javax.swing.JTable();
         jButtonAddShop = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+
+        jMenuItemMenageWorkplace.setText("Add workplace");
+        jPopupMenuWorker.add(jMenuItemMenageWorkplace);
+
+        jMenuItemDelete.setText("Delete");
+        jPopupMenuWorker.add(jMenuItemDelete);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Model marketingowo-handlowy");
@@ -194,9 +206,12 @@ public class MainWindow extends BasicJFrame {
     private javax.swing.JButton jButtonAddShop;
     private javax.swing.JButton jButtonAddWerehouse;
     private javax.swing.JButton jButtonAddWorker;
+    private javax.swing.JMenuItem jMenuItemDelete;
+    private javax.swing.JMenuItem jMenuItemMenageWorkplace;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenuWorker;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -206,6 +221,10 @@ public class MainWindow extends BasicJFrame {
     private javax.swing.JTable jTableWorkers;
     // End of variables declaration//GEN-END:variables
 
+    public void jTableWorkerAddListSelection(ListSelectionListener listSelectionListener){
+        this.jTableWorkers.getSelectionModel().addListSelectionListener(listSelectionListener);
+    }
+    
     public void jButtonAddWorkerActionPerformed(ActionListener actionListener){
         this.jButtonAddWorker.addActionListener(actionListener);
     }
@@ -218,10 +237,48 @@ public class MainWindow extends BasicJFrame {
         this.jButtonAddShop.addActionListener(actionListener);
     }
     
+    public void jMenuItemDeleteActionPerformed(ActionListener actionListener){
+        this.jMenuItemDelete.addActionListener(actionListener);
+    }
+    
     @Override
     public void update(Model model) {
        this.jTableWorkers.setModel(model.workersToTable());
        this.jTableWerehouse.setModel(model.workplacesToTable(Werehouse.class));
        this.jTableShop.setModel(model.workplacesToTable(Shop.class));
     }
+
+    public JTable getjTableShop() {
+        return jTableShop;
+    }
+
+    public void setjTableShop(JTable jTableShop) {
+        this.jTableShop = jTableShop;
+    }
+
+    public JTable getjTableWerehouse() {
+        return jTableWerehouse;
+    }
+
+    public void setjTableWerehouse(JTable jTableWerehouse) {
+        this.jTableWerehouse = jTableWerehouse;
+    }
+
+    public JTable getjTableWorkers() {
+        return jTableWorkers;
+    }
+
+    public void setjTableWorkers(JTable jTableWorkers) {
+        this.jTableWorkers = jTableWorkers;
+    }
+
+    public JPopupMenu getjPopupMenuWorker() {
+        return jPopupMenuWorker;
+    }
+
+    public void setjPopupMenuWorker(JPopupMenu jPopupMenuWorker) {
+        this.jPopupMenuWorker = jPopupMenuWorker;
+    }
+    
+    
 }

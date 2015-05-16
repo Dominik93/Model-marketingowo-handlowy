@@ -20,8 +20,12 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -48,26 +52,28 @@ public class Controller {
     }
     
     private void registerLoginEvents(){
-        this.login.jButtonLoginActionPerformed(new jButtonLogin());
+        this.login.jButtonLoginActionPerformed(new JButtonLogin());
     }
     
     private void registerMainEvents(){
-        this.mainWindow.jButtonAddWorkerActionPerformed(new jButtonAddWorker());
-        this.mainWindow.jButtonAddWerehouseActionPerformed(new jButtonAddWerehouse());
-        this.mainWindow.jButtonAddShopActionPerformed(new jButtonAddShop());
+        this.mainWindow.jButtonAddWorkerActionPerformed(new JButtonAddWorker());
+        this.mainWindow.jButtonAddWerehouseActionPerformed(new JButtonAddWerehouse());
+        this.mainWindow.jButtonAddShopActionPerformed(new JButtonAddShop());
+        this.mainWindow.jTableWorkerAddListSelection(new JTableListSelection());
+        this.mainWindow.jMenuItemDeleteActionPerformed(new JMenuItemDelete());
     }
     
     private void registerAddWorkerEvents(){
-        addWorkerJFrame.jButtonSaveActionPerformed(new jButtonSaveWorker());
-        addWorkerJFrame.jButtonCancelActionPerformed(new jButtonCancel());
+        addWorkerJFrame.jButtonSaveActionPerformed(new JButtonSaveWorker());
+        addWorkerJFrame.jButtonCancelActionPerformed(new JButtonCancel());
     }
     
     private void registerAddWorkplaceEvents(){
-        addWorkplaceJFrame.jButtonSaveActionPerformed(new jButtonSaveWorkplace());
-        addWorkplaceJFrame.jButtonCancelActionPerformed(new jButtonCancel());
+        addWorkplaceJFrame.jButtonSaveActionPerformed(new JButtonSaveWorkplace());
+        addWorkplaceJFrame.jButtonCancelActionPerformed(new JButtonCancel());
     }
     
-    private class jButtonLogin implements ActionListener{
+    private class JButtonLogin implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -89,7 +95,18 @@ public class Controller {
     
     }
     
-    private class jButtonAddWorker implements ActionListener{
+    private class JMenuItemDelete implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Worker worker = model.getWorker(mainWindow.getjTableWorkers().getValueAt(mainWindow.getjTableWorkers().getSelectedRow(), 0));
+            model.deleteWorker(worker);
+            model.notification();
+        }
+    
+    }
+    
+    private class JButtonAddWorker implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -102,7 +119,7 @@ public class Controller {
     
     }
     
-    private class jButtonAddWerehouse implements ActionListener{
+    private class JButtonAddWerehouse implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -115,7 +132,19 @@ public class Controller {
     
     }
     
-    private class jButtonAddShop implements ActionListener{
+     private class JTableListSelection implements ListSelectionListener{
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            System.out.println(mainWindow.getjTableWorkers().getValueAt(mainWindow.getjTableWorkers().getSelectedRow(), 0).toString());
+            mainWindow.getjPopupMenuWorker().show(mainWindow, 0, 0);
+            System.out.println(mainWindow.getjTableWorkers().getAlignmentX());
+            System.out.println(mainWindow.getjTableWorkers().getAlignmentY());
+        }
+
+    }
+    
+    private class JButtonAddShop implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -128,7 +157,7 @@ public class Controller {
     
     }
     
-    private class jButtonCancel implements ActionListener{
+    private class JButtonCancel implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -139,7 +168,7 @@ public class Controller {
     
     }
     
-    private class jButtonSaveWorker implements ActionListener{
+    private class JButtonSaveWorker implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -225,7 +254,7 @@ public class Controller {
         }
     }
     
-    private class jButtonSaveWorkplace implements ActionListener{
+    private class JButtonSaveWorkplace implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {

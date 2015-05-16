@@ -10,7 +10,6 @@ import com.slusarzwozniak.model.worker.Worker;
 import com.slusarzwozniak.interfaces.IObservable;
 import com.slusarzwozniak.model.hibernate.MenagerWorker;
 import com.slusarzwozniak.model.hibernate.MenagerWorkplace;
-import com.slusarzwozniak.model.workplace.Shop;
 import com.slusarzwozniak.model.workplace.Workplace;
 import com.slusarzwozniak.view.BasicJFrame;
 import com.slusarzwozniak.view.PositionAbstractTableModel;
@@ -163,6 +162,17 @@ public class Model implements IObservable{
 
     public void addWorkplace(Workplace workplace, Class c) {
         new MenagerWorkplace().addWorkplace(workplace, c);
+    }
+
+    public Worker getWorker(Object valueAt) {
+       menagerWorker = new MenagerWorker();
+       Worker worker = menagerWorker.getWorker((int)valueAt);
+       menagerWorker.closeSession();
+       return worker;
+    }
+
+    public boolean deleteWorker(Worker worker) {
+        return new MenagerWorker().deleteWorker(worker);
     }
     
 }
