@@ -6,11 +6,14 @@
 package com.slusarzwozniak.model.workplace;
 
 import com.slusarzwozniak.model.Address;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Dominik
  */
+
+@Entity
 public class Shop extends Workplace{
 
     public Shop() {

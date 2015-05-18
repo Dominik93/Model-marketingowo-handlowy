@@ -20,12 +20,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -51,6 +49,7 @@ public class Controller {
         this.registerLoginEvents();
     }
     
+    // <editor-fold defaultstate="collapsed" desc="Register">             
     private void registerLoginEvents(){
         this.login.jButtonLoginActionPerformed(new JButtonLogin());
     }
@@ -59,7 +58,13 @@ public class Controller {
         this.mainWindow.jButtonAddWorkerActionPerformed(new JButtonAddWorker());
         this.mainWindow.jButtonAddWerehouseActionPerformed(new JButtonAddWerehouse());
         this.mainWindow.jButtonAddShopActionPerformed(new JButtonAddShop());
-        this.mainWindow.jTableWorkerAddListSelection(new JTableListSelection());
+        this.mainWindow.jTableWorkerAddListSelection(new MouseAdapter(){
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getButton() == MouseEvent.BUTTON3)
+                        mainWindow.getjPopupMenuWorker().show(mainWindow, e.getLocationOnScreen().x, e.getLocationOnScreen().y);
+             }
+        });
         this.mainWindow.jMenuItemDeleteActionPerformed(new JMenuItemDelete());
     }
     
@@ -72,6 +77,7 @@ public class Controller {
         addWorkplaceJFrame.jButtonSaveActionPerformed(new JButtonSaveWorkplace());
         addWorkplaceJFrame.jButtonCancelActionPerformed(new JButtonCancel());
     }
+    // </editor-fold>
     
     private class JButtonLogin implements ActionListener{
 
@@ -79,13 +85,7 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             model.detach(login);
             login.dispose();
-            /*
-            if(model.checkWorker(login.getjComboBoxUsers().getSelectedItem().toString())){
-                model.setWorker(model.getWerehouseWorker(login.getjComboBoxUsers().getSelectedItem().toString()));
-            }else{
-                model.setWorker(model.getShopWorker(login.getjComboBoxUsers().getSelectedItem().toString()));
-            }
-            */
+            model.setLoggedWorker(model.getWorker(Integer.valueOf(login.getjComboBoxUsers().getSelectedItem().toString().split(" ")[0])));
             mainWindow = new MainWindow();
             model.attach(mainWindow);
             model.notification();
@@ -131,19 +131,7 @@ public class Controller {
         }
     
     }
-    
-     private class JTableListSelection implements ListSelectionListener{
-
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            System.out.println(mainWindow.getjTableWorkers().getValueAt(mainWindow.getjTableWorkers().getSelectedRow(), 0).toString());
-            mainWindow.getjPopupMenuWorker().show(mainWindow, 0, 0);
-            System.out.println(mainWindow.getjTableWorkers().getAlignmentX());
-            System.out.println(mainWindow.getjTableWorkers().getAlignmentY());
-        }
-
-    }
-    
+        
     private class JButtonAddShop implements ActionListener{
 
         @Override

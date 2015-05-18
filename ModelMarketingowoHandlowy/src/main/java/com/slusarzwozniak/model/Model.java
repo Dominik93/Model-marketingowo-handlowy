@@ -28,17 +28,17 @@ public class Model implements IObservable{
     private final ArrayList<BasicJFrame> views = new ArrayList<>();
     private MenagerWorker menagerWorker;
     
-    private Worker worker;
+    private Worker loggedWorker;
     
     public Model() throws ClassNotFoundException{
     }
 
-    public Worker getWorker() {
-        return worker;
+    public Worker getLoggedWorker() {
+        return loggedWorker;
     }
 
-    public void setWorker(Worker worker) {
-        this.worker = worker;
+    public void setLoggedWorker(Worker loggedWorker) {
+        this.loggedWorker = loggedWorker;
     }
     
     @Override

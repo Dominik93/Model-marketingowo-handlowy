@@ -9,6 +9,7 @@ import com.slusarzwozniak.model.Model;
 import com.slusarzwozniak.model.workplace.Shop;
 import com.slusarzwozniak.model.workplace.Werehouse;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
@@ -221,8 +222,9 @@ public class MainWindow extends BasicJFrame {
     private javax.swing.JTable jTableWorkers;
     // End of variables declaration//GEN-END:variables
 
-    public void jTableWorkerAddListSelection(ListSelectionListener listSelectionListener){
-        this.jTableWorkers.getSelectionModel().addListSelectionListener(listSelectionListener);
+    public void jTableWorkerAddListSelection(MouseListener mouseListener){
+        //this.jTableWorkers.getSelectionModel().addListSelectionListener(listSelectionListener);
+        this.jTableWorkers.addMouseListener(mouseListener);
     }
     
     public void jButtonAddWorkerActionPerformed(ActionListener actionListener){

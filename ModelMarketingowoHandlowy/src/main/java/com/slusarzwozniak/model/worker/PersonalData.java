@@ -6,11 +6,14 @@
 package com.slusarzwozniak.model.worker;
 
 import com.slusarzwozniak.model.Address;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Dominik
  */
+
+@Entity
 public class PersonalData {
     
     private Integer id;

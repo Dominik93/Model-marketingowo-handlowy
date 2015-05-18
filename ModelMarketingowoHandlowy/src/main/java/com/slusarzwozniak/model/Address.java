@@ -5,11 +5,13 @@
  */
 package com.slusarzwozniak.model;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Dominik
  */
-
+@Entity
 public class Address {
     
     private Integer id;

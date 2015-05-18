@@ -6,6 +6,7 @@
 package com.slusarzwozniak.model.worker;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -13,6 +14,8 @@ import javax.persistence.Id;
  *
  * @author Dominik
  */
+
+@Entity
 public class Position {
     
     @Id

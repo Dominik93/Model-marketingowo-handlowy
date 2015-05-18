@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="com.slusarzwozniak.model.worker.PersonalData" table="personaldata">
+  <class name="com.slusarzwozniak.model.worker.PersonalData" table="PersonalData">
     <meta attribute="class-description">
         This class contains the personal data detail. 
     </meta>

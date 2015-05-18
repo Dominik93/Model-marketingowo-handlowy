@@ -78,25 +78,25 @@ public class MenagerWorkplace {
             if(c.equals(Werehouse.class)){
                 List workplaceListWerehouse = session.createQuery("FROM Werehouse").list();
                 for (Iterator iteratorWorkers = workplaceListWerehouse.iterator(); iteratorWorkers.hasNext(); ){
-                Werehouse workplace = (Werehouse) iteratorWorkers.next();
-                Address address = new Address(workplace.getAddress().getStreet(),
-                                                workplace.getAddress().getNumber(),
-                                                workplace.getAddress().getCity(),
-                                                workplace.getAddress().getZipCode());
-                workplace.setAddress(address);
-                workplaces.add(workplace);
+                    Werehouse workplace = (Werehouse) iteratorWorkers.next();
+                    Address address = new Address(workplace.getAddress().getStreet(),
+                                                    workplace.getAddress().getNumber(),
+                                                    workplace.getAddress().getCity(),
+                                                    workplace.getAddress().getZipCode());
+                    workplace.setAddress(address);
+                    workplaces.add(workplace);
                 }
             }
             else if(c.equals(Shop.class)){
                 List workplaceListShop = session.createQuery("FROM Shop").list();
                 for (Iterator iteratorWorkers = workplaceListShop.iterator(); iteratorWorkers.hasNext(); ){
-                Shop workplace = (Shop) iteratorWorkers.next();
-                Address address = new Address(workplace.getAddress().getStreet(),
-                                                workplace.getAddress().getNumber(),
-                                                workplace.getAddress().getCity(),
-                                                workplace.getAddress().getZipCode());
-                workplace.setAddress(address);
-                workplaces.add(workplace);
+                    Shop workplace = (Shop) iteratorWorkers.next();
+                    Address address = new Address(workplace.getAddress().getStreet(),
+                                                    workplace.getAddress().getNumber(),
+                                                    workplace.getAddress().getCity(),
+                                                    workplace.getAddress().getZipCode());
+                    workplace.setAddress(address);
+                    workplaces.add(workplace);
                 }
             }
             tx.commit();

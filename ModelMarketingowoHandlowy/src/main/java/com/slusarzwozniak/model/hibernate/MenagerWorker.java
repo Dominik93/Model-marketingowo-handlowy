@@ -148,8 +148,8 @@ public class MenagerWorker {
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            session.delete(worker.getPersonalData().getAddress());
-            session.delete(worker.getPersonalData());
+            //session.delete(worker.getPersonalData().getAddress());
+            //session.delete(worker.getPersonalData());
             session.delete(worker);
             tx.commit();
             return true;
