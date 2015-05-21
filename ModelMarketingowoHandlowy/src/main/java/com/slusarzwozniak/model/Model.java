@@ -159,6 +159,16 @@ public class Model implements IObservable{
         menagerWorkplace.closeSession();
         return tableModel;
     }
+    
+    public DefaultComboBoxModel workplacesToComboBox(Class c) {
+        MenagerWorkplace menagerWorkplace = new MenagerWorkplace();
+        ArrayList<Workplace> workplacesList = menagerWorkplace.getWorkplaces(c);
+        String[] workplaces = new String[workplacesList.size()];
+        for(int i = 0; i < workplaces.length; i++)
+            workplaces[i] = workplacesList.get(i).getAddress().toString();
+        menagerWorkplace.closeSession();
+        return new DefaultComboBoxModel(workplaces);
+    }
 
     public void addWorkplace(Workplace workplace, Class c) {
         new MenagerWorkplace().addWorkplace(workplace, c);

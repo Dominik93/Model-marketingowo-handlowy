@@ -48,6 +48,11 @@ public class Worker {
     public void setPersonalData(PersonalData personalData) {
         this.personalData = personalData;
     }
+
+    @Override
+    public String toString() {
+        return personalData.getName()+ ' ' + personalData.getSurname();
+    }
     
-        
+      
 }

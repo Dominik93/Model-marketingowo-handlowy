@@ -4,9 +4,8 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://wirt07.biznes-host.pl:3306/virt101443_mh</property>
-    <property name="hibernate.connection.username">virt101443_mh</property>
-    <property name="hibernate.connection.password">regor36</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hand</property>
+    <property name="hibernate.connection.username">root</property>
     <mapping resource="address.hbm.xml"/>
     <mapping resource="personalData.hbm.xml"/>
     <mapping resource="worker.hbm.xml"/>

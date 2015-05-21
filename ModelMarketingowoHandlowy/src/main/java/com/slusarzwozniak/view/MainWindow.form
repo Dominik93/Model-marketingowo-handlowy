@@ -8,7 +8,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMenageWorkplace">
+        <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMenageWorkerWorkplace">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add workplace"/>
           </Properties>

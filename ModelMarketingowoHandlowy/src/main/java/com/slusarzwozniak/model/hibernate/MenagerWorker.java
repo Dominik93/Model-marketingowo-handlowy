@@ -55,7 +55,7 @@ public class MenagerWorker {
         return worker;
     }
     
-    /* Method to GET all workers from the database */
+    /* Method to GET worker from the database */
     public Worker getWorker(int id){
         session = factory.openSession();
         Transaction tx = null;

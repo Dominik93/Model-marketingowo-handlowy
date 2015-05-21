@@ -5,6 +5,7 @@
  */
 package com.slusarzwozniak.view;
 
+import com.slusarzwozniak.controller.Controller;
 import com.slusarzwozniak.model.Model;
 import com.slusarzwozniak.model.workplace.Shop;
 import com.slusarzwozniak.model.workplace.Werehouse;
@@ -12,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -47,7 +47,7 @@ public class MainWindow extends BasicJFrame {
     private void initComponents() {
 
         jPopupMenuWorker = new javax.swing.JPopupMenu();
-        jMenuItemMenageWorkplace = new javax.swing.JMenuItem();
+        jMenuItemMenageWorkerWorkplace = new javax.swing.JMenuItem();
         jMenuItemDelete = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -63,8 +63,8 @@ public class MainWindow extends BasicJFrame {
         jButtonAddShop = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
-        jMenuItemMenageWorkplace.setText("Add workplace");
-        jPopupMenuWorker.add(jMenuItemMenageWorkplace);
+        jMenuItemMenageWorkerWorkplace.setText("Add workplace");
+        jPopupMenuWorker.add(jMenuItemMenageWorkerWorkplace);
 
         jMenuItemDelete.setText("Delete");
         jPopupMenuWorker.add(jMenuItemDelete);
@@ -208,7 +208,7 @@ public class MainWindow extends BasicJFrame {
     private javax.swing.JButton jButtonAddWerehouse;
     private javax.swing.JButton jButtonAddWorker;
     private javax.swing.JMenuItem jMenuItemDelete;
-    private javax.swing.JMenuItem jMenuItemMenageWorkplace;
+    private javax.swing.JMenuItem jMenuItemMenageWorkerWorkplace;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -223,7 +223,6 @@ public class MainWindow extends BasicJFrame {
     // End of variables declaration//GEN-END:variables
 
     public void jTableWorkerAddListSelection(MouseListener mouseListener){
-        //this.jTableWorkers.getSelectionModel().addListSelectionListener(listSelectionListener);
         this.jTableWorkers.addMouseListener(mouseListener);
     }
     
@@ -241,6 +240,10 @@ public class MainWindow extends BasicJFrame {
     
     public void jMenuItemDeleteActionPerformed(ActionListener actionListener){
         this.jMenuItemDelete.addActionListener(actionListener);
+    }
+    
+    public void jMenuItemMenageWorkerWorkplaceActionPerformed(ActionListener actionListener) {
+        this.jMenuItemMenageWorkerWorkplace.addActionListener(actionListener);
     }
     
     @Override
@@ -281,6 +284,8 @@ public class MainWindow extends BasicJFrame {
     public void setjPopupMenuWorker(JPopupMenu jPopupMenuWorker) {
         this.jPopupMenuWorker = jPopupMenuWorker;
     }
+
+    
     
     
 }

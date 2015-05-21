@@ -68,7 +68,7 @@ public class MenagerWorkplace {
         return workplace;
     }
         
-    /* Method to GET all werehouse from the database */
+    /* Method to GET all workplaces from the database */
     public ArrayList getWorkplaces(Class c){
         session = factory.openSession();
         Transaction tx = null;

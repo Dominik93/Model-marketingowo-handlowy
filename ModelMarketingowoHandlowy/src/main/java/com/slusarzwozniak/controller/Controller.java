@@ -16,6 +16,7 @@ import com.slusarzwozniak.view.AddWorkerJFrame;
 import com.slusarzwozniak.view.AddWorkplaceJFrame;
 import com.slusarzwozniak.view.Login;
 import com.slusarzwozniak.view.MainWindow;
+import com.slusarzwozniak.view.MenageWorkerWorkplacesJFrame;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -36,6 +37,7 @@ public class Controller {
     private Login login;
     private AddWorkerJFrame addWorkerJFrame;
     private AddWorkplaceJFrame addWorkplaceJFrame;
+    private MenageWorkerWorkplacesJFrame menageWorkerWorkplacesJFrame;
     
     public Controller(Model model, Login loginJFrame) {
         this.model = model;
@@ -66,6 +68,7 @@ public class Controller {
              }
         });
         this.mainWindow.jMenuItemDeleteActionPerformed(new JMenuItemDelete());
+        this.mainWindow.jMenuItemMenageWorkerWorkplaceActionPerformed(new JMenuItemMenageWorkerWorkplace());
     }
     
     private void registerAddWorkerEvents(){
@@ -77,8 +80,81 @@ public class Controller {
         addWorkplaceJFrame.jButtonSaveActionPerformed(new JButtonSaveWorkplace());
         addWorkplaceJFrame.jButtonCancelActionPerformed(new JButtonCancel());
     }
+    
+    private void registerMenageWorkerWorkplacesEvents(){
+        menageWorkerWorkplacesJFrame.jComboBoxActionPerformed(new JComboBoxChangeWorkplace());
+    }
     // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Main Listeners">   
+    private class JButtonAddWorker implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            addWorkerJFrame = new AddWorkerJFrame();
+            model.attach(addWorkerJFrame);
+            model.notification();
+            registerAddWorkerEvents();
+            addWorkerJFrame.setVisible(true);
+        }
+        
+    }
+    
+    private class JButtonAddWerehouse implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            addWorkplaceJFrame = new AddWorkplaceJFrame(Werehouse.class);
+            model.attach(addWorkplaceJFrame);
+            model.notification();
+            registerAddWorkplaceEvents();
+            addWorkplaceJFrame.setVisible(true);
+        }
+        
+    }
+        
+    private class JButtonAddShop implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            addWorkplaceJFrame = new AddWorkplaceJFrame(Shop.class);
+            model.attach(addWorkplaceJFrame);
+            model.notification();
+            registerAddWorkplaceEvents();
+            addWorkplaceJFrame.setVisible(true);
+        }
+        
+    }
+    
+    private class JMenuItemDelete implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Worker worker = model.getWorker(mainWindow.getjTableWorkers().getValueAt(mainWindow.getjTableWorkers().getSelectedRow(), 0));
+            model.deleteWorker(worker);
+            model.notification();
+        }
+    
+    }
+    
+    private class JMenuItemMenageWorkerWorkplace implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Worker worker = model.getWorker(mainWindow.getjTableWorkers().getValueAt(mainWindow.getjTableWorkers().getSelectedRow(), 0));
+            menageWorkerWorkplacesJFrame = new MenageWorkerWorkplacesJFrame();
+            menageWorkerWorkplacesJFrame.getjLabelWorker().setText(worker.toString());
+            model.attach(menageWorkerWorkplacesJFrame);
+            registerMenageWorkerWorkplacesEvents();
+            model.notification();
+            menageWorkerWorkplacesJFrame.getjComboBoxWorkplaceDetail().setModel(model.workplacesToComboBox(Werehouse.class));
+            menageWorkerWorkplacesJFrame.setVisible(true); 
+        }
+    
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Login Listeners">   
     private class JButtonLogin implements ActionListener{
 
         @Override
@@ -94,68 +170,9 @@ public class Controller {
         }
     
     }
+    // </editor-fold>
     
-    private class JMenuItemDelete implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Worker worker = model.getWorker(mainWindow.getjTableWorkers().getValueAt(mainWindow.getjTableWorkers().getSelectedRow(), 0));
-            model.deleteWorker(worker);
-            model.notification();
-        }
-    
-    }
-    
-    private class JButtonAddWorker implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            addWorkerJFrame = new AddWorkerJFrame();
-            model.attach(addWorkerJFrame);
-            model.notification();
-            registerAddWorkerEvents();
-            addWorkerJFrame.setVisible(true);
-        }
-    
-    }
-    
-    private class JButtonAddWerehouse implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            addWorkplaceJFrame = new AddWorkplaceJFrame(Werehouse.class);
-            model.attach(addWorkplaceJFrame);
-            model.notification();
-            registerAddWorkplaceEvents();
-            addWorkplaceJFrame.setVisible(true);
-        }
-    
-    }
-        
-    private class JButtonAddShop implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            addWorkplaceJFrame = new AddWorkplaceJFrame(Shop.class);
-            model.attach(addWorkplaceJFrame);
-            model.notification();
-            registerAddWorkplaceEvents();
-            addWorkplaceJFrame.setVisible(true);
-        }
-    
-    }
-    
-    private class JButtonCancel implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Component component = (Component) e.getSource();
-            JFrame frame = (JFrame) SwingUtilities.getRoot(component);
-            frame.dispose();
-        }
-    
-    }
-    
+    // <editor-fold defaultstate="collapsed" desc="Add worker Listeners">   
     private class JButtonSaveWorker implements ActionListener{
 
         @Override
@@ -241,7 +258,9 @@ public class Controller {
             }
         }
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Add workplace Listeners">   
     private class JButtonSaveWorkplace implements ActionListener{
 
         @Override
@@ -295,4 +314,32 @@ public class Controller {
             }
         }
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Add workplace Listeners">  
+    private class JComboBoxChangeWorkplace implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int i = menageWorkerWorkplacesJFrame.getjComboBoxWorkplace().getSelectedIndex();
+            if (i == 0)
+                menageWorkerWorkplacesJFrame.getjComboBoxWorkplaceDetail().setModel(model.workplacesToComboBox(Werehouse.class));
+            else if (i == 1)
+                menageWorkerWorkplacesJFrame.getjComboBoxWorkplaceDetail().setModel(model.workplacesToComboBox(Shop.class));
+        }
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="All Listeners">   
+    private class JButtonCancel implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Component component = (Component) e.getSource();
+            JFrame frame = (JFrame) SwingUtilities.getRoot(component);
+            frame.dispose();
+        }
+    
+    }
+    // </editor-fold>
 }
